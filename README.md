@@ -1,5 +1,40 @@
 # Mini Order App
 
+## How to Run
+
+### Via Docker
+
+```bash
+docker build -t mini-order -f deployments/Dockerfile .
+docker run -d -p 3000:3000 --name mini-order mini-order
+```
+
+To rebuild:
+
+```bash
+docker stop mini-order && docker rm mini-order
+docker build -t mini-order -f deployments/Dockerfile .
+docker run -d -p 3000:3000 --name mini-order mini-order
+```
+
+### Via npm
+
+```bash
+npm install
+npx prisma generate
+npx prisma db push
+npx prisma db seed
+npm run dev
+```
+
+## Tradeoffs
+
+- Using SQLite for easy reviewer setup
+- No Redis/cache layer due to small data size
+- No authentication since it was not required
+- Using server actions for rapid development
+- Using Zustand for its simplicity and production-grade quality compared to Redux's complex setup
+
 ## ERD / Schema
 
 ```mermaid
@@ -52,6 +87,8 @@ erDiagram
 19. Add a yellow "warning" badge variant and apply it to the "Pending" status pill with dark text for readability.
 20. Make the Cancel Order button solid red with white text in both light and dark modes.
 21. Restyle the sidebar with a flush active state — active nav item has a red accent background, bold red text, right-edge flush against the sidebar border, and a red vertical accent line.
+22. Clean up README and fix Dockerfile — correct Docker commands (image name mismatch, invalid port flag), rewrite Dockerfile from Nginx static export to Node.js runtime (required for server actions), add Prisma generate/db push/seed steps, add .dockerignore, and translate tradeoffs to English.
+23. Fix Prisma OpenSSL compatibility on Alpine — add `openssl` and `libc6-compat` packages, move db push/seed from build to runtime via `start.sh` entrypoint so SQLite persists across container restarts.
 ```
 
 ## Token Used
