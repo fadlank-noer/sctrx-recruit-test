@@ -8,7 +8,6 @@ import { revalidatePath } from "next/cache";
 export type ActionResponse = { success: true } | { success: false; error: string };
 
 export async function updateOrderStatus(
-  _prev: ActionResponse,
   formData: FormData,
 ): Promise<ActionResponse> {
   const orderId = formData.get("orderId") as string;

@@ -15,7 +15,7 @@ export async function getOrders(options: {
       ? {
           OR: [
             { customer: { contains: search } },
-            { orderNumber: { contains: search, mode: "insensitive" as const } },
+            { orderNumber: { contains: search } },
             { email: { contains: search } },
           ],
         }

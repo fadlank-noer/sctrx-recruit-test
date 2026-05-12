@@ -3,7 +3,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Check, Ban, Clock, ArrowRight, PackageOpen } from "lucide-react";
 import { STATUS_LABELS, STATUS_VARIANTS, type OrderStatus } from "@/features/orders/types";
@@ -36,8 +35,27 @@ export function OrderDetailPanel({
 }: {
   order: OrderDetail | null;
 }) {
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
+
+  function handleStatusChange(orderId: string, newStatus: string) {
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.set("orderId", orderId);
+      formData.set("newStatus", newStatus);
+      try {
+        const result = await updateOrderStatus(formData);
+        if (!result.success) {
+          toast.error(result.error);
+        } else {
+          toast.success("Order status updated.");
+          router.refresh();
+        }
+      } catch {
+        toast.error("Failed to update order status.");
+      }
+    });
+  }
 
   if (!order) {
     return (
@@ -47,18 +65,6 @@ export function OrderDetailPanel({
         <p className="text-sm text-muted-foreground/70">Click an order from the list to view details.</p>
       </div>
     );
-  }
-
-  function handleSubmit(formData: FormData) {
-    startTransition(async () => {
-      const result = await updateOrderStatus({ success: true }, formData);
-      if (!result.success) {
-        toast.error(result.error);
-      } else {
-        toast.success("Order status updated.");
-        router.refresh();
-      }
-    });
   }
 
   const status = order.status as OrderStatus;
@@ -95,22 +101,14 @@ export function OrderDetailPanel({
 
         {status === "PENDING" && (
           <div className="flex gap-2">
-            <form action={handleSubmit} className="flex-1">
-              <input type="hidden" name="orderId" value={order.id} />
-              <input type="hidden" name="newStatus" value="PAID" />
-              <Button className="w-full gap-1" size="sm">
-                <Check className="h-3.5 w-3.5" />
-                Mark as Paid
-              </Button>
-            </form>
-            <form action={handleSubmit} className="flex-1">
-              <input type="hidden" name="orderId" value={order.id} />
-              <input type="hidden" name="newStatus" value="CANCELLED" />
-              <Button variant="destructive" className="w-full gap-1" size="sm">
-                <Ban className="h-3.5 w-3.5" />
-                Cancel Order
-              </Button>
-            </form>
+            <Button className="flex-1 gap-1" size="sm" disabled={isPending} onClick={() => handleStatusChange(order.id, "PAID")}>
+              <Check className="h-3.5 w-3.5" />
+              Mark as Paid
+            </Button>
+            <Button variant="destructive" className="flex-1 gap-1" size="sm" disabled={isPending} onClick={() => handleStatusChange(order.id, "CANCELLED")}>
+              <Ban className="h-3.5 w-3.5" />
+              Cancel Order
+            </Button>
           </div>
         )}
 

@@ -1,6 +1,5 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { Sun, Moon, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -10,9 +9,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useThemeStore } from "@/stores/theme-store";
 
 export function Header() {
-  const { setTheme, theme } = useTheme();
+  const { theme, toggleTheme } = useThemeStore();
 
   return (
     <header className="flex h-14 items-center justify-between border-b border-border bg-background px-6">
@@ -20,7 +20,7 @@ export function Header() {
         <h1 className="text-lg font-semibold">Order Management</h1>
       </div>
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+        <Button variant="ghost" size="icon" onClick={toggleTheme}>
           <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>

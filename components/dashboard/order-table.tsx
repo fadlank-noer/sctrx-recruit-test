@@ -17,12 +17,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { STATUS_LABELS, STATUS_VARIANTS, type OrderStatus } from "@/features/orders/types";
-import { useActionState, useTransition } from "react";
-import { updateOrderStatus, type ActionResponse } from "@/features/orders/actions";
+import { useTransition } from "react";
+import { updateOrderStatus } from "@/features/orders/actions";
 import { toast } from "sonner";
 import { Ban, Check } from "lucide-react";
 
-type OrderRow = {
+export type OrderRow = {
   id: string;
   orderNumber: string;
   customer: string;
@@ -137,37 +137,36 @@ export function OrderTable({
 }
 
 function ActionButtons({ orderId }: { orderId: string }) {
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
-  function handleSubmit(formData: FormData) {
+  function handleStatusChange(newStatus: string) {
     startTransition(async () => {
-      const result = await updateOrderStatus({ success: true }, formData);
-      if (!result.success) {
-        toast.error(result.error);
-      } else {
-        toast.success("Order status updated.");
+      const formData = new FormData();
+      formData.set("orderId", orderId);
+      formData.set("newStatus", newStatus);
+      try {
+        const result = await updateOrderStatus(formData);
+        if (!result.success) {
+          toast.error(result.error);
+        } else {
+          toast.success("Order status updated.");
+        }
+      } catch {
+        toast.error("Failed to update order status.");
       }
     });
   }
 
   return (
     <div className="flex gap-1">
-      <form action={handleSubmit}>
-        <input type="hidden" name="orderId" value={orderId} />
-        <input type="hidden" name="newStatus" value="PAID" />
-        <Button size="sm" variant="outline" className="h-7 gap-1 text-xs">
-          <Check className="h-3 w-3" />
-          Pay
-        </Button>
-      </form>
-      <form action={handleSubmit}>
-        <input type="hidden" name="orderId" value={orderId} />
-        <input type="hidden" name="newStatus" value="CANCELLED" />
-        <Button size="sm" variant="ghost" className="h-7 gap-1 text-xs text-destructive hover:text-destructive">
-          <Ban className="h-3 w-3" />
-          Cancel
-        </Button>
-      </form>
+      <Button size="sm" variant="outline" className="h-7 gap-1 text-xs" disabled={isPending} onClick={() => handleStatusChange("PAID")}>
+        <Check className="h-3 w-3" />
+        Pay
+      </Button>
+      <Button size="sm" variant="ghost" className="h-7 gap-1 text-xs text-destructive hover:text-destructive" disabled={isPending} onClick={() => handleStatusChange("CANCELLED")}>
+        <Ban className="h-3 w-3" />
+        Cancel
+      </Button>
     </div>
   );
 }
