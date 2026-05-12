@@ -34,7 +34,7 @@ export function OrderList({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       {data.orders.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-border bg-background py-16 text-center">
           <Inbox className="h-12 w-12 text-muted-foreground/50" />
