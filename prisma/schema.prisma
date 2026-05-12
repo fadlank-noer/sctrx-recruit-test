@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Order {
+  id          String     @id @default(cuid())
+  orderNumber String     @unique
+  customer    String
+  email       String
+  amount      Float
+  status      String     @default("PENDING")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  auditLogs   AuditLog[]
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  orderId   String
+  action    String
+  fromValue String?
+  toValue   String
+  createdAt DateTime @default(now())
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
