@@ -18,7 +18,7 @@ export function Header() {
     <header className="flex h-14 items-center justify-between border-b border-border bg-background px-6">
       <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
         <h1 className="text-lg font-semibold">Order Management</h1>
-        <h3 className="text-sm text-muted-foreground">Welcome back to Soci-o-rder!</h3>
+        <h3 className="text-sm text-muted-foreground">Welcome back to SOCI-O-RDER!</h3>
       </div>
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" onClick={toggleTheme}>
@@ -26,17 +26,14 @@ export function Header() {
           <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </Button>
-        <Button variant="ghost" size="icon">
-          <Bell className="h-4 w-4" />
-        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger render={<Button variant="ghost" className="gap-2 px-2" />}>
             <Avatar className="h-7 w-7">
               <AvatarFallback className="text-xs">AD</AvatarFallback>
             </Avatar>
-            <span className="hidden sm:inline text-sm font-medium">Admin</span>
+            <span className="hidden sm:inline text-sm font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Admin</span>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="font-[family-name:var(--font-sans)]">
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Log out</DropdownMenuItem>

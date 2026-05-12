@@ -12,8 +12,8 @@ export const STATUS_LABELS: Record<OrderStatus, string> = {
   CANCELLED: "Cancelled",
 };
 
-export const STATUS_VARIANTS: Record<OrderStatus, "default" | "secondary" | "destructive" | "outline"> = {
-  PENDING: "outline",
+export const STATUS_VARIANTS: Record<OrderStatus, "default" | "secondary" | "destructive" | "outline" | "warning"> = {
+  PENDING: "warning",
   PAID: "default",
   CANCELLED: "destructive",
 };

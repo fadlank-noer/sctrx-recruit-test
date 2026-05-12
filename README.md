@@ -47,8 +47,13 @@ erDiagram
 14. Widen the toolbar search input to fill the remaining horizontal space beside the status tabs.
 15. Fix order detail panel amount format from USD ($) to Rupiah (Rp) and apply Plus Jakarta Sans font.
 16. Standardize status badge pill widths to match the longest status label ("Cancelled") for consistent column alignment.
+17. Adjust `--border`, `--input`, and `--sidebar-border` CSS variables for better contrast in both light and dark modes — darker borders on white, more visible borders on dark backgrounds.
+18. Make the "Cancelled" status pill solid red with white text in both light and dark modes.
+19. Add a yellow "warning" badge variant and apply it to the "Pending" status pill with dark text for readability.
+20. Make the Cancel Order button solid red with white text in both light and dark modes.
+21. Restyle the sidebar with a flush active state — active nav item has a red accent background, bold red text, right-edge flush against the sidebar border, and a red vertical accent line.
 ```
 
 ## Token Used
 
-Total tokens used: **6,889,589** (1,218,992 + 5,670,597)
+Total tokens used: **17,018,817**

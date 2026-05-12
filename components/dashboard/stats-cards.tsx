@@ -46,7 +46,7 @@ export function StatsCards({ stats }: { stats: Stats }) {
             <card.icon className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{card.format(card.value)}</p>
+            <p className="text-2xl font-bold" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{card.format(card.value)}</p>
           </CardContent>
         </Card>
       ))}
