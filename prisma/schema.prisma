@@ -10,6 +10,7 @@ datasource db {
 model Order {
   id          String     @id @default(cuid())
   orderNumber String     @unique
+  orderName   String
   customer    String
   email       String
   amount      Float

@@ -1,8 +1,6 @@
 import { getOrders, getOrderStats, getOrderWithAuditLogs } from "@/features/orders/queries";
 import { StatsCards } from "@/components/dashboard/stats-cards";
-import { StatusTabs } from "@/components/dashboard/status-tabs";
-import { OrderList } from "@/components/dashboard/order-list";
-import { OrderDetailPanel } from "@/components/dashboard/order-detail-panel";
+import { OrderToolbar } from "@/components/dashboard/order-toolbar";
 import { DashboardContent } from "./dashboard-content";
 
 export default async function DashboardPage({
@@ -25,7 +23,7 @@ export default async function DashboardPage({
   return (
     <div className="space-y-6">
       <StatsCards stats={stats} />
-      <StatusTabs activeStatus={status} />
+      <OrderToolbar activeStatus={status} counts={stats} />
       <DashboardContent
         ordersData={ordersData}
         selectedOrder={selectedOrder}

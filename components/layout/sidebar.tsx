@@ -12,7 +12,7 @@ export function Sidebar() {
   const theme = useThemeStore((s) => s.theme);
 
   return (
-    <aside className="hidden lg:flex w-60 flex-col border-r border-border bg-sidebar">
+    <aside className="hidden lg:flex w-60 flex-col border-r border-border bg-sidebar" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       <div className="flex h-14 items-center gap-2 px-4 border-b border-border">
         <Image
           src={theme === "dark" ? "/dark-mode-remove-bg.png" : "/light-mode-remove-bg.png"}

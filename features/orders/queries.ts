@@ -16,6 +16,7 @@ export async function getOrders(options: {
           OR: [
             { customer: { contains: search } },
             { orderNumber: { contains: search } },
+            { orderName: { contains: search } },
             { email: { contains: search } },
           ],
         }

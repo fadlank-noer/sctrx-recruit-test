@@ -16,8 +16,9 @@ export function Header() {
 
   return (
     <header className="flex h-14 items-center justify-between border-b border-border bg-background px-6">
-      <div>
+      <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
         <h1 className="text-lg font-semibold">Order Management</h1>
+        <h3 className="text-sm text-muted-foreground">Welcome back to Soci-o-rder!</h3>
       </div>
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" onClick={toggleTheme}>

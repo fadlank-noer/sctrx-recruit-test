@@ -71,7 +71,7 @@ export function OrderDetailPanel({
 
   return (
     <ScrollArea className="h-[calc(100dvh-12rem)]">
-      <div className="space-y-4">
+      <div className="space-y-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
@@ -90,7 +90,7 @@ export function OrderDetailPanel({
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Amount</span>
-              <span className="font-medium">${order.amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}</span>
+              <span className="font-medium">Rp{order.amount.toLocaleString("id-ID")}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Created</span>

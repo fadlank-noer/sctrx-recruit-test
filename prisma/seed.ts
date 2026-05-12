@@ -22,8 +22,41 @@ const CUSTOMERS = [
 
 const STATUSES = ["PENDING", "PENDING", "PENDING", "PAID", "PAID", "CANCELLED"] as const;
 
+const ORDER_NAMES = [
+  "Google Ads - Search Campaign Q2",
+  "Meta Ads - Brand Awareness Push",
+  "TikTok Ads - Conversion Boost",
+  "Google Ads - Shopping Feed Optimization",
+  "Meta Ads - Retargeting Warm Audience",
+  "TikTok Ads - Spark Ads Creator Pack",
+  "Google Ads - Performance Max Launch",
+  "Meta Ads - Lead Gen Funnel",
+  "YouTube Ads - Pre-Roll Branding",
+  "Google Ads - Remarketing RLSA",
+  "Meta Ads - Lookalike Audience Expansion",
+  "TikTok Ads - App Install Drive",
+  "Google Ads - ROAS Optimization Sprint",
+  "Meta Ads - Dynamic Product Retargeting",
+  "LinkedIn Ads - B2B Lead Generation",
+  "Google Ads - Smart Bidding Pilot",
+  "Meta Ads - Carousel Engagement",
+  "TikTok Ads - Influencer Whitelist",
+  "Google Ads - Local Services Push",
+  "Meta Ads - Conversion API Setup",
+  "YouTube Ads - Masthead Takeover",
+  "Google Ads - Discovery Feed Campaign",
+  "Meta Ads - Advantage+ Shopping",
+  "TikTok Ads - TopView Awareness",
+  "Google Ads - ROAS Scale-Up Phase 2",
+  "Meta Ads - Reels Engagement Boost",
+  "LinkedIn Ads - Thought Leadership",
+  "Google Ads - Call-Only Campaign",
+  "Meta Ads - Seasonal Promo Blast",
+  "Google Ads - Video Action Campaign",
+] as const;
+
 function randomAmount(): number {
-  return Math.round((Math.random() * 485 + 15) * 100) / 100;
+  return Math.round((Math.random() * 48_500_000 + 1_500_000) / 100_000) * 100_000;
 }
 
 function randomDate(daysAgo: number): Date {
@@ -45,6 +78,7 @@ async function main() {
 
     orders.push({
       orderNumber: `ORD-${String(i).padStart(3, "0")}`,
+      orderName: ORDER_NAMES[i - 1],
       customer: customer.name,
       email: customer.email,
       amount: randomAmount(),

@@ -2,6 +2,32 @@
 
 ## ERD / Schema
 
+```mermaid
+erDiagram
+    Order {
+        string id PK "cuid"
+        string orderNumber UK
+        string orderName
+        string customer
+        string email
+        float amount
+        string status "default PENDING"
+        datetime createdAt "default now"
+        datetime updatedAt "updatedAt"
+    }
+
+    AuditLog {
+        string id PK "cuid"
+        string orderId FK
+        string action
+        string fromValue "nullable"
+        string toValue
+        datetime createdAt "default now"
+    }
+
+    Order ||--o{ AuditLog : "has"
+```
+
 
 ## Prompt Used
 ```md
@@ -10,6 +36,17 @@
 3. Remove unused navigation items from the sidebar, keeping only the Dashboard link.
 4. Replace the sidebar logo text with theme-aware PNG images (dark/light variants) that switch based on the active theme.
 5. Replace the `next-themes` theme toggle with a Zustand-powered theme store for state management.
+6. Add an `orderName` column to the Order schema, update the seed data with ads/ROAS-related campaign names and Rupiah amounts, and reflect the new field in the order table and search queries.
+7. Replace separate Status Tabs and Search Bar with a unified Order Toolbar combining status tabs (with badge counts) and search input in a single row.
+8. Update the Revenue stats card icon from DollarSign to Banknote and format amounts as Rupiah (Rp) with Indonesian locale.
+9. Fix light mode border visibility by darkening the `--border` and `--sidebar-border` CSS variables so borders remain visible on white backgrounds.
+10. Replace the global font from Geist to Plus Jakarta Sans (weights 200–800) via `next/font/google` and apply explicit font-family declarations across all dashboard, header, sidebar, and detail panel components.
+11. Add a Mermaid ERD diagram to the README schema section visualizing the Order and AuditLog relationship.
+12. Add a "Welcome back to Soci-o-rder!" subtitle below the header title.
+13. Update toolbar badge pill colors to follow the Sociotrax color palette — dark grey (#54595F) background with white text in light mode, inverted in dark mode.
+14. Widen the toolbar search input to fill the remaining horizontal space beside the status tabs.
+15. Fix order detail panel amount format from USD ($) to Rupiah (Rp) and apply Plus Jakarta Sans font.
+16. Standardize status badge pill widths to match the longest status label ("Cancelled") for consistent column alignment.
 ```
 
 ## Token Used

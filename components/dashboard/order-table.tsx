@@ -25,6 +25,7 @@ import { Ban, Check } from "lucide-react";
 export type OrderRow = {
   id: string;
   orderNumber: string;
+  orderName: string;
   customer: string;
   email: string;
   amount: number;
@@ -36,6 +37,13 @@ const columns: ColumnDef<OrderRow>[] = [
   {
     accessorKey: "orderNumber",
     header: "Order",
+  },
+  {
+    accessorKey: "orderName",
+    header: "Order Name",
+    cell: ({ row }) => (
+      <span className="font-medium">{row.getValue("orderName")}</span>
+    ),
   },
   {
     accessorKey: "customer",
@@ -51,7 +59,7 @@ const columns: ColumnDef<OrderRow>[] = [
   {
     accessorKey: "amount",
     header: "Amount",
-    cell: ({ row }) => `$${(row.getValue("amount") as number).toLocaleString("en-US", { minimumFractionDigits: 2 })}`,
+    cell: ({ row }) => `Rp${(row.getValue("amount") as number).toLocaleString("id-ID")}`,
   },
   {
     accessorKey: "status",
@@ -59,7 +67,7 @@ const columns: ColumnDef<OrderRow>[] = [
     cell: ({ row }) => {
       const status = row.getValue("status") as OrderStatus;
       return (
-        <Badge variant={STATUS_VARIANTS[status]}>
+        <Badge variant={STATUS_VARIANTS[status]} className="w-[84px] justify-center">
           {STATUS_LABELS[status]}
         </Badge>
       );
@@ -101,7 +109,7 @@ export function OrderTable({
   });
 
   return (
-    <div className="rounded-xl border border-border bg-background">
+    <div className="rounded-xl border border-border bg-background" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

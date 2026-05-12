@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ShoppingCart, Clock, DollarSign, CheckCircle } from "lucide-react";
+import { ShoppingCart, Clock, Banknote, CheckCircle } from "lucide-react";
 
 type Stats = {
   total: number;
@@ -26,8 +26,8 @@ export function StatsCards({ stats }: { stats: Stats }) {
     {
       title: "Revenue",
       value: stats.revenue,
-      icon: DollarSign,
-      format: (v: number) => `$${v.toLocaleString("en-US", { minimumFractionDigits: 2 })}`,
+      icon: Banknote,
+      format: (v: number) => `Rp${v.toLocaleString("id-ID")}`,
     },
     {
       title: "Completed",
