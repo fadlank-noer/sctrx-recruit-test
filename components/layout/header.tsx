@@ -29,13 +29,11 @@ export function Header() {
           <Bell className="h-4 w-4" />
         </Button>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="gap-2 px-2">
-              <Avatar className="h-7 w-7">
-                <AvatarFallback className="text-xs">AD</AvatarFallback>
-              </Avatar>
-              <span className="hidden sm:inline text-sm font-medium">Admin</span>
-            </Button>
+          <DropdownMenuTrigger render={<Button variant="ghost" className="gap-2 px-2" />}>
+            <Avatar className="h-7 w-7">
+              <AvatarFallback className="text-xs">AD</AvatarFallback>
+            </Avatar>
+            <span className="hidden sm:inline text-sm font-medium">Admin</span>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>Profile</DropdownMenuItem>
